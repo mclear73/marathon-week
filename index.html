@@ -74,6 +74,10 @@ th{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.05em
 td.m{font-family:var(--mono);white-space:nowrap;font-size:12.5px}
 ul{margin:0;padding-left:18px} li{margin:4px 0;font-size:13.5px}
 .foot{font-size:12px;color:var(--mute);margin-top:14px;text-align:center}
+.install{display:none;margin-top:10px;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--accent);border-radius:10px;padding:10px 12px;font-size:13.5px}
+.install.show{display:flex}
+.install button{border:0;background:var(--accent);color:var(--accent-ink);font:600 13px var(--body);border-radius:8px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+.install .x{background:none;color:var(--mute);padding:4px 6px;font-size:16px}
 @media (prefers-reduced-motion:no-preference){.row{transition:border-color .15s}}
 </style>
 
@@ -87,6 +91,7 @@ ul{margin:0;padding-left:18px} li{margin:4px 0;font-size:13.5px}
 </header>
 
 <section id="panel-week" class="panel" role="tabpanel">
+  <div class="install" id="install"><span id="installMsg">Install this as an app on your phone.</span><span><button id="installBtn">Install</button><button class="x" id="installX" aria-label="Dismiss">×</button></span></div>
   <div class="nav"><button id="prev" aria-label="Previous week">‹</button><div class="wk" id="wkTitle"></div><button id="next" aria-label="Next week">›</button></div>
   <div class="note" id="wkNote"></div>
   <div class="days" id="days"></div>
@@ -273,6 +278,19 @@ render();
 })();
 </script>
 
+<script>
+(function(){
+var box=document.getElementById('install'),btn=document.getElementById('installBtn'),msg=document.getElementById('installMsg'),deferred=null;
+var standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+var dismissed=false; try{dismissed=localStorage.getItem('mw-install-x')==='1'}catch(e){}
+function fallback(){ if(standalone||dismissed)return; msg.textContent='To install: Chrome menu (⋮) → scroll to the bottom → "Add to Home screen".'; btn.hidden=true; box.classList.add('show'); }
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;if(standalone||dismissed)return;btn.hidden=false;msg.textContent='Install this as an app on your phone.';box.classList.add('show')});
+btn.addEventListener('click',function(){if(!deferred)return;deferred.prompt();deferred.userChoice.then(function(){box.classList.remove('show');deferred=null})});
+document.getElementById('installX').addEventListener('click',function(){box.classList.remove('show');try{localStorage.setItem('mw-install-x','1')}catch(e){}});
+window.addEventListener('appinstalled',function(){box.classList.remove('show')});
+setTimeout(function(){if(!deferred)fallback()},2500);
+})();
+</script>
 <script>
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').then(function(r){r.update()})})}
 </script>

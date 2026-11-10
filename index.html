@@ -71,7 +71,8 @@ h1{font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:.01e
 table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
 th,td{text-align:left;padding:5px 4px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
-td.m{font-family:var(--mono);white-space:nowrap;font-size:12.5px}
+td.m{font-family:var(--mono);font-size:12.5px}
+.card table.wrap td.m{white-space:normal}
 ul{margin:0;padding-left:18px} li{margin:4px 0;font-size:13.5px}
 .foot{font-size:12px;color:var(--mute);margin-top:14px;text-align:center}
 .install{display:none;margin-top:10px;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--accent);border-radius:10px;padding:10px 12px;font-size:13.5px}
@@ -95,21 +96,21 @@ ul{margin:0;padding-left:18px} li{margin:4px 0;font-size:13.5px}
   <div class="nav"><button id="prev" aria-label="Previous week">‹</button><div class="wk" id="wkTitle"></div><button id="next" aria-label="Next week">›</button></div>
   <div class="note" id="wkNote"></div>
   <div class="days" id="days"></div>
-  <div class="foot">Tap a day to open it. Easy runs: 9:00–9:45/mi, HR under 160. Checkmarks are saved on this phone only.</div>
+  <div class="foot">Tap a day to open it. Easy runs: 9:00–9:45/mi, HR under 150. Checkmarks are saved on this phone only.</div>
 </section>
 
 <section id="panel-ref" class="panel" role="tabpanel" hidden>
   <div class="card"><h3>Training paces (set from 3:25)</h3>
   <table><tr><th>Zone</th><th>Pace</th><th>HR</th></tr>
-  <tr><td>Recovery</td><td class="m">9:45–10:15</td><td class="m">&lt;145</td></tr>
-  <tr><td>Easy</td><td class="m">9:00–9:45</td><td class="m">140–158</td></tr>
-  <tr><td>Long run</td><td class="m">8:45–9:30</td><td class="m">&lt;160</td></tr>
+  <tr><td>Recovery</td><td class="m">9:45–10:15</td><td class="m">&lt;140</td></tr>
+  <tr><td>Easy</td><td class="m">9:00–9:45</td><td class="m">135–150</td></tr>
+  <tr><td>Long run</td><td class="m">8:45–9:30</td><td class="m">&lt;155</td></tr>
   <tr><td>Marathon pace</td><td class="m">7:45–7:55</td><td class="m">160–170</td></tr>
   <tr><td>Threshold</td><td class="m">7:20–7:35</td><td class="m">170–178</td></tr>
   <tr><td>10K pace</td><td class="m">7:05–7:15</td><td class="m">178–185</td></tr>
   <tr><td>5K / VO2</td><td class="m">6:45–6:55</td><td class="m">185+</td></tr>
   <tr><td>Strides</td><td class="m">~6:00 × 20 s</td><td class="m">—</td></tr></table>
-  <p style="font-size:12.5px;color:var(--mute);margin:8px 0 0">Hot or humid: +15–30 s/mi above MP. Hills: go by HR. An easy run under 8:45/mi was a workout you didn't plan.</p></div>
+  <p style="font-size:12.5px;color:var(--mute);margin:8px 0 0">Max HR 193 (Garmin). Easy = 70–78% of max, which is 135–150, not the 160 the plan first used. Hot or humid: +15–30 s/mi above MP. Hills: go by HR.</p></div>
 
   <div class="card"><h3>Phase 0 · Nov 9 – Dec 27</h3>
   <table><tr><th>Wk</th><th>Dates</th><th>Mi</th><th>Long</th><th>Tue</th></tr>
@@ -123,17 +124,33 @@ ul{margin:0;padding-left:18px} li{margin:4px 0;font-size:13.5px}
   <tr><td>8 ↓</td><td>Dec 28–Jan 3</td><td class="m">20</td><td class="m">9</td><td>Strides</td></tr></table></div>
 
   <div class="card"><h3>If any of these fire, it's a down week</h3>
-  <ul><li>Easy-run HR over 160 at 9:15/mi or slower, two runs in a row</li>
+  <ul><li>Easy-run HR over 150 at 9:15/mi or slower, two runs in a row</li>
   <li>A niggle that changes your stride: stop, two days off</li>
   <li>Long run cut short or 30 s/mi slow: don't advance it next week</li>
-  <li>HRV down 7+ days, body battery not recovering 3 nights, or a week under 7 h sleep</li>
-  <li>Reps drop on leg-day working sets, or climbing quality falls off</li></ul></div>
+  <li>7-day resting HR 5+ bpm above your 30-day baseline (baseline now ~50; spring fitness was 45–47)</li>
+  <li>7-night sleep average under 6.25 h, or two nights under 5 h in a week</li>
+  <li>Body battery under 40 on waking, 3 mornings in 7</li>
+  <li>HRV status "low" or "unbalanced" 7+ days (Garmin app; not in the export)</li>
+  <li>Reps drop on leg-day working sets, or climbing quality falls off</li></ul>
+  <p style="font-size:12.5px;color:var(--mute);margin:8px 0 0">Single-day rule: wake body battery under 40, or a night under 5 h → today's run is easy regardless of what's scheduled.</p></div>
+
+  <div class="card"><h3>Your Garmin baseline (Jan–Nov 2026)</h3>
+  <table class="wrap"><tr><th>Signal</th><th>Now</th><th>Best 2026</th><th>Target</th></tr>
+  <tr><td>Resting HR</td><td class="m">52</td><td class="m">45 (Apr)</td><td class="m">≤48 by Mar</td></tr>
+  <tr><td>Sleep, 60-night mean</td><td class="m">6.6 h</td><td class="m">7.2 h (Apr)</td><td class="m">7.25 h avg</td></tr>
+  <tr><td>Nights under 7 h</td><td class="m">36 of 60</td><td class="m">—</td><td class="m">≤2 per week</td></tr>
+  <tr><td>Nights unrecorded</td><td class="m">21 of 71</td><td class="m">—</td><td class="m">0 (wear it)</td></tr>
+  <tr><td>Wake body battery</td><td class="m">63</td><td class="m">78 (Apr)</td><td class="m">≥70</td></tr>
+  <tr><td>VO2 max (Garmin)</td><td class="m">54</td><td class="m">55 (late Sep)</td><td class="m">56+ by summer</td></tr>
+  <tr><td>Weight (Index scale)</td><td class="m">187 lb</td><td class="m">197 (Sep)</td><td class="m">183–187 to Mar</td></tr></table>
+  <p style="font-size:12.5px;color:var(--mute);margin:8px 0 0">Resting HR has risen 5–7 bpm since April while weight dropped 10 lb in 8 weeks on short sleep. That pattern is under-recovery, which is why the deficit ends Nov 30 and sleep is now a trigger.</p></div>
 
   <div class="card"><h3>Lift rules for this block</h3>
   <ul><li>Legs are stacked after Friday's easy run, never the day before the long run.</li>
   <li>Upper push is short (20–25 min) and sits on Tuesday; climbing covers all pulling.</li>
   <li>Leave 2 reps in the tank on every set until week 5. No PR attempts in this block.</li>
-  <li>Bands (hips, glutes, shoulders) are the one thing that never gets skipped.</li></ul></div>
+  <li>Bands (hips, glutes, shoulders) are the one thing that never gets skipped.</li>
+  <li>Slept under 5 h? Do the run; drop the lift.</li></ul></div>
 </section>
 </div>
 
@@ -149,12 +166,12 @@ var LEGS_MAINT=[["Goblet squat","2 × 8",""],["Romanian deadlift","2 × 6","ligh
 
 function run(t,d,n){return {kind:"run",title:t,detail:d,note:n||""}}
 function rest(t,d){return {kind:"rest",title:t,detail:d||""}}
-var EASY="Conversational. 9:00–9:45/mi, HR under 160. If it drifts over 160, slow down or walk 60 s.";
+var EASY="Conversational. 9:00–9:45/mi, HR under 150. If it drifts over 150, slow down or walk 60 s.";
 var STR="Then 6 × 20 s strides on flat ground: build to ~6:00 effort, walk back. Smooth, not sprinting.";
-var LONGN="8:45–9:30/mi, HR under 160. Carry water over 9 mi. Nothing fast; the point is time on feet.";
+var LONGN="8:45–9:30/mi, HR under 155. Carry water over 9 mi. Nothing fast; the point is time on feet.";
 
 var weeks=[
- {n:1,label:"Wk 1 · 18 mi",start:"2026-11-09",note:"Every run under HR 160. Yoga returns.",days:[
+ {n:1,label:"Wk 1 · 18 mi",start:"2026-11-09",note:"Every run under HR 150. Wear the watch to bed. Yoga returns.",days:[
   {run:rest("Rest"),sec:{t:"Easy yoga 20–30 min",k:"rest"}},
   {run:run("Easy 3 + strides",EASY+" "+STR),sec:{t:"Upper push",k:"lift",ex:PUSH_A,d:"20–25 min after the run"}},
   {run:run("Easy 4",EASY),sec:{t:"Climb",k:"rest"}},
@@ -162,7 +179,7 @@ var weeks=[
   {run:run("Easy 3 + strides",EASY+" "+STR),sec:{t:"Bands only",k:"lift",ex:BANDS,d:"Hips and glutes, 12 min. No loaded leg work this week."}},
   {run:rest("Off or 3 mi recovery","9:45–10:15/mi if you run"),sec:{t:"Climb (short) · leg-free day",k:"rest"}},
   {run:run("Long 8",LONGN),sec:{t:"Yoga / mobility evening",k:"rest"}}]},
- {n:2,label:"Wk 2 · 20 mi",start:"2026-11-16",note:"Leg day returns Friday, light.",days:[
+ {n:2,label:"Wk 2 · 20 mi",start:"2026-11-16",note:"Leg day returns Friday, light. Deficit capped at 1.0 lb/wk from here.",days:[
   {run:rest("Rest"),sec:{t:"Easy yoga 20–30 min",k:"rest"}},
   {run:run("Easy 4 + strides",EASY+" "+STR),sec:{t:"Upper push",k:"lift",ex:PUSH_A,d:"20–25 min after the run"}},
   {run:run("Easy 4",EASY),sec:{t:"Climb",k:"rest"}},
@@ -178,7 +195,7 @@ var weeks=[
   {run:run("Easy 3 + strides",EASY+" "+STR),sec:{t:"Legs · light",k:"lift",ex:LEGS_LIGHT,d:"Skip if you ran long yesterday; do bands instead."}},
   {run:rest("Off or 3 mi recovery"),sec:{t:"Climb (short) · leg-free day",k:"rest"}},
   {run:run("Long 10",LONGN+" (Easy 3 if you ran long on Thursday.)"),sec:{t:"Yoga / mobility evening",k:"rest"}}]},
- {n:4,label:"Wk 4 ↓ · 17 mi",start:"2026-11-30",note:"Down week. Fat-loss block ends; move to maintenance calories.",days:[
+ {n:4,label:"Wk 4 ↓ · 17 mi",start:"2026-11-30",note:"Down week. Deficit ends today: maintenance calories from Nov 30.",days:[
   {run:rest("Rest"),sec:{t:"Easy yoga 20–30 min",k:"rest"}},
   {run:run("Easy 3 + strides",EASY+" "+STR),sec:{t:"Upper push",k:"lift",ex:PUSH_A,d:"20–25 min after the run"}},
   {run:run("Easy 3",EASY),sec:{t:"Climb",k:"rest"}},
